@@ -7,6 +7,7 @@ public class User {
     private String lastName;
     private boolean isAdmin;
     private boolean isBlacklisted;
+    private String blacklistReason;
 
     public User(String email, String password, String firstName, String lastName) {
         this.email = email;
@@ -15,6 +16,7 @@ public class User {
         this.lastName = lastName;
         this.isAdmin = false;
         isBlacklisted = false;
+        blacklistReason = "";
     }
 
     public String getEmail() {
@@ -41,11 +43,16 @@ public class User {
         return isBlacklisted;
     }
 
-    public void setBlacklisted(boolean blacklistUser) {
+    public void setBlacklisted(boolean blacklistUser, String reason) {
         isBlacklisted = blacklistUser;
+        blacklistReason = reason;
     }
 
     public void setAdmin(boolean promoteToAdmin) {
         isAdmin = promoteToAdmin;
+    }
+
+    public void setPassword(String newPassword) {
+        password = newPassword;
     }
 }

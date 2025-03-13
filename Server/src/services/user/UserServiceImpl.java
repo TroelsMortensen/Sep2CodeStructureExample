@@ -1,10 +1,12 @@
 ﻿package services.user;
 
 import dtos.user.BlacklistUserRequest;
-import dtos.user.PromoteUserToAdminRequest;
+import dtos.user.PromoteUserRequest;
+import dtos.user.UpdatePasswordRequest;
 import dtos.user.ViewUsers;
 import model.entities.User;
 import model.exceptions.BusinessLogicException;
+import model.exceptions.NotFoundException;
 import persistence.repositories.user.UserListRepository;
 
 import java.util.ArrayList;
@@ -18,8 +20,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void promoteToAdmin(PromoteUserToAdminRequest request) {
+    public void promoteToAdmin(PromoteUserRequest request) {
         User user = userRepo.getSingle(request.email());
+        if (user == null) {
+            throw new NotFoundException("User with email '" + request.email() + "' not found.");
+        }
         if (user.isBlacklisted()) {
             throw new BusinessLogicException("The user with email '" + request.email() + "' is blacklisted, and cannot be promoted to admin.");
         }
@@ -35,10 +40,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void blacklistUser(BlacklistUserRequest request) {
         User user = userRepo.getSingle(request.email());
+        if (user == null) {
+            throw new NotFoundException("User with email '" + request.email() + "' not found.");
+        }
         if (user.isBlacklisted()) {
             throw new BusinessLogicException("The user with email '" + request.email() + "' is already blacklisted.");
         }
-        user.setBlacklisted(true);
+        user.setBlacklisted(true, request.reason());
         user.setAdmin(false);
         userRepo.save(user);
     }
@@ -54,5 +62,18 @@ public class UserServiceImpl implements UserService {
         }
 
         return result;
+    }
+
+    @Override
+    public void updatePassword(UpdatePasswordRequest request) {
+        User user = userRepo.getSingle(request.email());
+        if (user == null) {
+            throw new NotFoundException("User with email '" + request.email() + "' not found.");
+        }
+        if(!user.getPassword().equals(request.oldPassword())){
+            throw new BusinessLogicException("Incorrect password");
+        }
+        user.setPassword(request.newPassword());
+        userRepo.save(user);
     }
 }

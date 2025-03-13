@@ -1,14 +1,15 @@
 ﻿package services.user;
 
 import dtos.user.BlacklistUserRequest;
-import dtos.user.PromoteUserToAdminRequest;
+import dtos.user.PromoteUserRequest;
+import dtos.user.UpdatePasswordRequest;
 import dtos.user.ViewUsers;
 
 import java.util.List;
 
 public interface UserService {
-    void promoteToAdmin(PromoteUserToAdminRequest request);
+    void promoteToAdmin(PromoteUserRequest request);
     void blacklistUser(BlacklistUserRequest request);
-
-    List<ViewUsers.UserDto> getUsersOverview(ViewUsers.Request payload);
+    List<ViewUsers.UserDto> getUsersOverview(ViewUsers.Request request);
+    void updatePassword(UpdatePasswordRequest request);
 }
