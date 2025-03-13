@@ -15,12 +15,14 @@ public class AuthServiceImpl implements AuthenticationService {
         this.userRepository = userRepository;
     }
 
+
     @Override
     public void registerUser(RegisterUserRequest request) {
         User existingUser = userRepository.getSingle(request.email());
         if(existingUser != null){
             throw new BusinessLogicException("Email is already in use.");
         }
+
         validateEmailIsCorrectFormat(request.email());
         validatePasswordIsCorrectFormat(request.password());
         validateName(request.firstName());

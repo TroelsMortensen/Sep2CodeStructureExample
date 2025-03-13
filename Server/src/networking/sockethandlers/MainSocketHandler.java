@@ -13,6 +13,15 @@ import java.io.*;
 import java.net.Socket;
 
 public class MainSocketHandler implements Runnable {
+
+    // I have specific SocketHandlers, generally per entity type, but not necessarily.
+    // It is to split things out a little bit. Make parallel work easier.
+    // The responsibility of this class is to
+    // * receive the request from the client
+    // * figure out which specific handler to pass the request to
+    // * handle any exceptions thrown from anywhere in the server
+    // * respond back to the client with either a success or failure message
+
     private final Socket clientSocket;
     private final ServiceLocator serviceLocator;
 

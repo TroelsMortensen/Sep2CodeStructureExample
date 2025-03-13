@@ -14,6 +14,14 @@ public class UserListRepository implements UserRepository {
         users.add(user);
     }
 
+
+    /**
+     * Just find a User entity by a given email.
+     * Return null, if no matching user was found.
+     * I could have thrown an exception instead, it might be simpler.
+     * @param email
+     * @return
+     */
     @Override
     public User getSingle(String email) {
         for (User user : users) {
@@ -26,7 +34,7 @@ public class UserListRepository implements UserRepository {
 
     @Override
     public void delete(String email) {
-
+        // Will implement later. Just remove from list.
     }
 
     @Override

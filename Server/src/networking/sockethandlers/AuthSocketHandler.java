@@ -14,7 +14,8 @@ public class AuthSocketHandler implements SocketHandler {
 
     @Override
     public Object handle(String action, Object payload) {
-        // Some methods can return something, some do not. Logging in? If no exceptions are thrown, success is assumed.
+        // Some methods can return something, some do not. Logging in? If no exceptions are thrown, success could be assumed.
+        // Here, though, I explicitly return "OK", just as an example. I don't really use it.
         switch (action) {
             case "register" -> authenticationService.registerUser((RegisterUserRequest) payload);
             case "login" -> {

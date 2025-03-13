@@ -43,8 +43,8 @@ public class User {
         return isBlacklisted;
     }
 
-    public void setBlacklisted(boolean blacklistUser, String reason) {
-        isBlacklisted = blacklistUser;
+    public void blacklist(String reason) {
+        isBlacklisted = true;
         blacklistReason = reason;
     }
 
