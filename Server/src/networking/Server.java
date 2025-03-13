@@ -19,7 +19,7 @@ public class Server {
 
         while(true){
             Socket socket = serverSocket.accept();
-            MainSocketHandler socketHandler = new MainSocketHandler(socket);
+            MainSocketHandler socketHandler = new MainSocketHandler(socket, serviceLocator);
             Thread socketThread = new Thread(socketHandler);
             socketThread.start();
         }

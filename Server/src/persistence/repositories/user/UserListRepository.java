@@ -5,7 +5,7 @@ import model.entities.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserListRepository implements UserRepository{
+public class UserListRepository implements UserRepository {
 
     private final static List<User> users = new ArrayList<>();
 
@@ -17,8 +17,7 @@ public class UserListRepository implements UserRepository{
     @Override
     public User getSingle(String email) {
         for (User user : users) {
-            if(email.equals(user.getEmail()))
-            {
+            if (email.equals(user.getEmail())) {
                 return user;
             }
         }
@@ -39,7 +38,15 @@ public class UserListRepository implements UserRepository{
     }
 
     @Override
-    public void getMany() {
-
+    public List<User> getMany(int pageIndex, int pageSize, String firstNameContains) {
+        List<User> result = new ArrayList<>();
+        for (int i = 0; i < pageSize; i++) {
+            // this is an attempt at implementing paging, as seen in dbs, maybe it works
+            User user = users.get(pageIndex * pageSize + i);
+            if(user.getFirstName().contains(firstNameContains)){
+                result.add(user);
+            }
+        }
+        return result;
     }
 }

@@ -2,9 +2,13 @@
 
 import dtos.user.BlacklistUserRequest;
 import dtos.user.PromoteUserToAdminRequest;
+import dtos.user.ViewUsers;
 import model.entities.User;
 import model.exceptions.BusinessLogicException;
 import persistence.repositories.user.UserListRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private final UserListRepository userRepo;
@@ -37,5 +41,18 @@ public class UserServiceImpl implements UserService {
         user.setBlacklisted(true);
         user.setAdmin(false);
         userRepo.save(user);
+    }
+
+    @Override
+    public List<ViewUsers.UserDto> getUsersOverview(ViewUsers.Request filterParameters) {
+        List<User> users = userRepo.getMany(filterParameters.pageIndex(), filterParameters.pageSize(), filterParameters.firstNameContains());
+        List<ViewUsers.UserDto> result = new ArrayList<>();
+
+        for (User user : users) {
+            ViewUsers.UserDto dto = new ViewUsers.UserDto(user.getEmail(), user.getFirstName(), user.getLastName());
+            result.add(dto);
+        }
+
+        return result;
     }
 }
