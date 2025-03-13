@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
             throw new BusinessLogicException("The user with email '" + request.email() + "' is blacklisted, and cannot be promoted to admin.");
         }
 
-        if(user.isAdmin()){
+        if (user.isAdmin()) {
             throw new BusinessLogicException("The user with email '" + request.email() + "' is already an admin.");
         }
 
@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
             throw new BusinessLogicException("The user with email '" + request.email() + "' is already blacklisted.");
         }
         user.setBlacklisted(true);
+        user.setAdmin(false);
         userRepo.save(user);
     }
 }
