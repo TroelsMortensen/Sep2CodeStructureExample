@@ -7,15 +7,15 @@ import dtos.user.ViewUsers;
 import model.entities.User;
 import model.exceptions.BusinessLogicException;
 import model.exceptions.NotFoundException;
-import persistence.repositories.user.UserListRepository;
+import persistence.repositories.user.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    private final UserListRepository userRepo;
+    private final UserRepository userRepo;
 
-    public UserServiceImpl(UserListRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         userRepo = userRepository;
     }
 
