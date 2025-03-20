@@ -64,15 +64,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ViewUsers.UserDto> getUsersOverview(ViewUsers.Request filterParameters) {
+    public List<ViewUsers.UserDisplayDto> getUsersOverview(ViewUsers.Request filterParameters) {
         List<User> users = userRepo.getMany(filterParameters.pageIndex(), filterParameters.pageSize(), filterParameters.firstNameContains());
-        List<ViewUsers.UserDto> result = new ArrayList<>();
+        List<ViewUsers.UserDisplayDto> result = new ArrayList<>();
 
         // convert User to UserDto. This way we only send the data, the client needs. We don't include the password, for example.
         // I could add admin status or black list status, if needed.
 
         for (User user : users) {
-            ViewUsers.UserDto dto = new ViewUsers.UserDto(user.getEmail(), user.getFirstName(), user.getLastName());
+            ViewUsers.UserDisplayDto dto = new ViewUsers.UserDisplayDto(user.getEmail(), user.getFirstName(), user.getLastName());
             result.add(dto);
         }
 

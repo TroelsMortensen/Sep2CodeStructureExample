@@ -20,9 +20,13 @@ public class SocketService
             outputStream.writeObject(request);
             Response response = (Response) inputStream.readObject();
 
-            switch (response.status()){
-                case "ERROR", "SERVER_FAILURE" -> throw new RuntimeException(((ErrorResponse)response.payload()).errorMessage());
-                case "SUCCESS" -> {}
+            switch (response.status())
+            {
+                case "ERROR", "SERVER_FAILURE" ->
+                        throw new RuntimeException(((ErrorResponse) response.payload()).errorMessage());
+                case "SUCCESS" ->
+                {
+                }
                 default -> throw new RuntimeException("Unknown response");
             }
 
@@ -30,7 +34,6 @@ public class SocketService
         }
         catch (IOException e)
         {
-            e.printStackTrace();
             throw new RuntimeException("Could not connect to server!");
         }
         catch (ClassNotFoundException e)

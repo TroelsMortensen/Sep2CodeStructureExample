@@ -2,6 +2,7 @@ package services.authentication;
 
 import dtos.auth.LoginRequest;
 import dtos.auth.RegisterUserRequest;
+import dtos.user.UserDataDto;
 import model.entities.User;
 import model.exceptions.BusinessLogicException;
 import model.exceptions.ValidationException;
@@ -59,7 +60,7 @@ public class AuthServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public String login(LoginRequest request) {
+    public UserDataDto login(LoginRequest request) {
         User existingUser = userRepository.getSingle(request.email());
         if(existingUser == null){
             throw new BusinessLogicException("User not found.");
@@ -67,6 +68,7 @@ public class AuthServiceImpl implements AuthenticationService {
         if(!existingUser.getPassword().equals(request.password())){
             throw new BusinessLogicException("Incorrect password.");
         }
-        return "OK";
+        UserDataDto userData = new UserDataDto(existingUser.getEmail(), existingUser.getFirstName(), existingUser.getLastName());
+        return userData;
     }
 }

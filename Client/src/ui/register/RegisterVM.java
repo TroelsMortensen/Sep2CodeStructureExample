@@ -25,6 +25,8 @@ public class RegisterVM
         emailProp.addListener(this::updateRegisterButtonState);
         passwordProp.addListener(this::updateRegisterButtonState);
         repeatProp.addListener(this::updateRegisterButtonState);
+        firstNameProp.addListener(this::updateRegisterButtonState);
+        lastNameProp.addListener(this::updateRegisterButtonState);
     }
 
     public void registerUser()

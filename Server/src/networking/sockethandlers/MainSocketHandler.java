@@ -71,15 +71,16 @@ public class MainSocketHandler implements Runnable
         }
         catch (ClassCastException e)
         {
+            e.printStackTrace();
             ErrorResponse payload = new ErrorResponse("Invalid request");
             Response error = new Response("ERROR", payload);
             outgoingData.writeObject(error);
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             ErrorResponse payload = new ErrorResponse(e.getMessage());
             Response error = new Response("SERVER_FAILURE", payload);
-            e.printStackTrace();
             outgoingData.writeObject(error);
         }
     }

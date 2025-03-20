@@ -5,6 +5,6 @@ package dtos.user;
 // If you plan on re-using the UserDto other places, maybe it should be moved to its own file.
 public abstract class ViewUsers {
     public record Request(int pageIndex, int pageSize, String firstNameContains){}
-    public record UserDto(String email, String firstName, String lastName){}
+    public record UserDisplayDto(String email, String firstName, String lastName){}
 }
 
