@@ -12,7 +12,8 @@ import startup.ServiceLocator;
 import java.io.*;
 import java.net.Socket;
 
-public class MainSocketHandler implements Runnable {
+public class MainSocketHandler implements Runnable
+{
 
     // I have specific SocketHandlers, generally per entity type, but not necessarily.
     // It is to split things out a little bit. Make parallel work easier.
@@ -25,34 +26,56 @@ public class MainSocketHandler implements Runnable {
     private final Socket clientSocket;
     private final ServiceLocator serviceLocator;
 
-    public MainSocketHandler(Socket clientSocket, ServiceLocator serviceLocator) {
+    public MainSocketHandler(Socket clientSocket, ServiceLocator serviceLocator)
+    {
         this.clientSocket = clientSocket;
         this.serviceLocator = serviceLocator;
     }
 
     @Override
-    public void run() {
-        try (ObjectOutputStream outgoingData = new ObjectOutputStream(clientSocket.getOutputStream());
-             ObjectInputStream incomingData = new ObjectInputStream(clientSocket.getInputStream())
-        ) {
+    public void run()
+    {
+        try (ObjectInputStream incomingData = new ObjectInputStream(clientSocket.getInputStream());
+             ObjectOutputStream outgoingData = new ObjectOutputStream(clientSocket.getOutputStream()))
+        {
             handleRequestWithErrorHandling(incomingData, outgoingData);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                clientSocket.close();
+            }
+            catch (IOException _)
+            {
+            }
         }
     }
 
-    private void handleRequestWithErrorHandling(ObjectInputStream incomingData, ObjectOutputStream outgoingData) throws IOException {
-        try {
+    private void handleRequestWithErrorHandling(ObjectInputStream incomingData, ObjectOutputStream outgoingData) throws IOException
+    {
+        try
+        {
             handleRequest(incomingData, outgoingData);
-        } catch (ValidationException | BusinessLogicException | NotFoundException | InvalidActionException e) {
+        }
+        catch (ValidationException | BusinessLogicException | NotFoundException | InvalidActionException e)
+        {
             ErrorResponse payload = new ErrorResponse(e.getMessage());
             Response error = new Response("ERROR", payload);
             outgoingData.writeObject(error);
-        } catch (ClassCastException e) {
-            ErrorResponse payload = new ErrorResponse("Invalid request type for this action");
+        }
+        catch (ClassCastException e)
+        {
+            ErrorResponse payload = new ErrorResponse("Invalid request");
             Response error = new Response("ERROR", payload);
             outgoingData.writeObject(error);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             ErrorResponse payload = new ErrorResponse(e.getMessage());
             Response error = new Response("SERVER_FAILURE", payload);
             outgoingData.writeObject(error);
@@ -60,9 +83,11 @@ public class MainSocketHandler implements Runnable {
         }
     }
 
-    private void handleRequest(ObjectInputStream incomingData, ObjectOutputStream outgoingData) throws IOException, ClassNotFoundException {
+    private void handleRequest(ObjectInputStream incomingData, ObjectOutputStream outgoingData) throws IOException, ClassNotFoundException
+    {
         Request request = (Request) incomingData.readObject();
-        SocketHandler handler = switch (request.handler()) {
+        SocketHandler handler = switch (request.handler())
+        {
             case "auth" -> serviceLocator.getAuthenticationSocketHandler();
             case "users" -> serviceLocator.getUserSocketHandler();
             default -> throw new IllegalStateException("Unexpected value: " + request.handler());
