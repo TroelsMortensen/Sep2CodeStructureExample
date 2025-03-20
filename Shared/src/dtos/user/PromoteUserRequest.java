@@ -1,4 +1,4 @@
-﻿package dtos.user;
+package dtos.user;
 
 public record PromoteUserRequest(String email) {
 }

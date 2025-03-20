@@ -1,4 +1,4 @@
-﻿package startup;
+package startup;
 
 import networking.sockethandlers.AuthSocketHandler;
 import networking.sockethandlers.SocketHandler;

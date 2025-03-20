@@ -1,4 +1,4 @@
-﻿package networking.sockethandlers;
+package networking.sockethandlers;
 
 import dtos.Request;
 import dtos.Response;
@@ -35,9 +35,10 @@ public class MainSocketHandler implements Runnable
     @Override
     public void run()
     {
-        try (ObjectInputStream incomingData = new ObjectInputStream(clientSocket.getInputStream());
-             ObjectOutputStream outgoingData = new ObjectOutputStream(clientSocket.getOutputStream()))
+        try
         {
+            ObjectInputStream incomingData = new ObjectInputStream(clientSocket.getInputStream());
+            ObjectOutputStream outgoingData = new ObjectOutputStream(clientSocket.getOutputStream());
             handleRequestWithErrorHandling(incomingData, outgoingData);
         }
         catch (IOException e)
@@ -78,8 +79,8 @@ public class MainSocketHandler implements Runnable
         {
             ErrorResponse payload = new ErrorResponse(e.getMessage());
             Response error = new Response("SERVER_FAILURE", payload);
-            outgoingData.writeObject(error);
             e.printStackTrace();
+            outgoingData.writeObject(error);
         }
     }
 

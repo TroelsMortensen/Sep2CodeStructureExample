@@ -1,4 +1,4 @@
-﻿package networking.sockethandlers;
+package networking.sockethandlers;
 
 import dtos.user.BlacklistUserRequest;
 import dtos.user.PromoteUserRequest;

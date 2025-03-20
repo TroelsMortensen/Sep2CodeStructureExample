@@ -39,7 +39,7 @@ public class RegisterController implements Controller
         passwordInput.textProperty().bindBidirectional(viewModel.passwordProperty());
         repeatPasswordInput.textProperty().bindBidirectional(viewModel.repeatProperty());
         firstNameInput.textProperty().bindBidirectional(viewModel.firstNameProperty());
-        firstNameInput.textProperty().bindBidirectional(viewModel.lastNameProperty());
+        lastNameInput.textProperty().bindBidirectional(viewModel.lastNameProperty());
 
         messageLabel.textProperty().bind(viewModel.messageProperty());
 

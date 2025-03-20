@@ -52,9 +52,10 @@ public class RegisterVM
             messageProp.set("Password cannot be empty");
             return;
         }
-        if (!emailProp.get().equals(passwordProp.get()))
+        if (!passwordProp.get().equals(repeatProp.get()))
         {
             messageProp.set("Passwords do not match");
+            System.out.println(passwordProp.get()+repeatProp.get());
             return;
         }
 

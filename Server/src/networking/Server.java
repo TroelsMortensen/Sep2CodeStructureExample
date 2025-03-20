@@ -1,4 +1,4 @@
-﻿package networking;
+package networking;
 
 import networking.sockethandlers.MainSocketHandler;
 import startup.ServiceLocator;
@@ -16,7 +16,7 @@ public class Server {
 
     public void start() throws IOException {
         ServerSocket serverSocket = new ServerSocket(2910);
-
+        System.out.println("Server started, listening for connections...");
         while(true){
             Socket socket = serverSocket.accept();
             MainSocketHandler socketHandler = new MainSocketHandler(socket, serviceLocator);

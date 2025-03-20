@@ -1,4 +1,7 @@
-﻿package dtos.auth;
+package dtos.auth;
 
-public record RegisterUserRequest(String email,String password, String firstName, String lastName) {
+import java.io.Serializable;
+
+public record RegisterUserRequest(String email, String password, String firstName, String lastName) implements Serializable
+{
 }

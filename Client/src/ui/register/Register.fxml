@@ -9,17 +9,17 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.register.RegisterController">
    <children>
-      <TextField layoutX="226.0" layoutY="26.0" prefHeight="25.0" prefWidth="359.0" />
-      <TextField layoutX="226.0" layoutY="63.0" prefHeight="25.0" prefWidth="359.0" />
-      <TextField layoutX="226.0" layoutY="99.0" prefHeight="25.0" prefWidth="359.0" />
+      <TextField fx:id="emailInput" layoutX="226.0" layoutY="26.0" prefHeight="25.0" prefWidth="359.0" />
+      <TextField fx:id="firstNameInput" layoutX="226.0" layoutY="63.0" prefHeight="25.0" prefWidth="359.0" />
+      <TextField fx:id="lastNameInput" layoutX="226.0" layoutY="99.0" prefHeight="25.0" prefWidth="359.0" />
       <Label layoutX="41.0" layoutY="30.0" prefHeight="17.0" prefWidth="166.0" text="Email" />
       <Label layoutX="41.0" layoutY="67.0" prefHeight="17.0" prefWidth="166.0" text="First name" />
       <Label layoutX="41.0" layoutY="103.0" prefHeight="17.0" prefWidth="166.0" text="Last name" />
       <Label layoutX="41.0" layoutY="138.0" prefHeight="17.0" prefWidth="166.0" text="Password" />
       <Label layoutX="41.0" layoutY="171.0" prefHeight="17.0" prefWidth="166.0" text="Repeat password" />
       <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="228.0" prefHeight="17.0" prefWidth="558.0" />
-      <PasswordField layoutX="226.0" layoutY="134.0" prefHeight="25.0" prefWidth="359.0" />
-      <PasswordField layoutX="226.0" layoutY="167.0" prefHeight="25.0" prefWidth="359.0" />
+      <PasswordField fx:id="passwordInput" layoutX="226.0" layoutY="134.0" prefHeight="25.0" prefWidth="359.0" />
+      <PasswordField fx:id="repeatPasswordInput" layoutX="226.0" layoutY="167.0" prefHeight="25.0" prefWidth="359.0" />
       <Button fx:id="buttonRegister" layoutX="270.0" layoutY="267.0" mnemonicParsing="false" onAction="#onRegister" text="Register" />
       <Button layoutX="15.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack" text="&lt; Back" />
    </children>

@@ -1,4 +1,4 @@
-﻿package dtos.user;
+package dtos.user;
 
 // I have a wrapper abstract class, because the request and dto belong together.
 // This is a way to have them together in the same file.

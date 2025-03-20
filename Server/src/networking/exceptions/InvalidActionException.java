@@ -1,4 +1,4 @@
-﻿package networking.exceptions;
+package networking.exceptions;
 
 public class InvalidActionException extends RuntimeException{
     public InvalidActionException(String handler, String action) {

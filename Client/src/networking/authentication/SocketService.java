@@ -2,6 +2,7 @@ package networking.authentication;
 
 import dtos.Request;
 import dtos.Response;
+import dtos.error.ErrorResponse;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -20,7 +21,7 @@ public class SocketService
             Response response = (Response) inputStream.readObject();
 
             switch (response.status()){
-                case "ERROR", "SERVER_FAILURE" -> throw new RuntimeException((String)response.payload());
+                case "ERROR", "SERVER_FAILURE" -> throw new RuntimeException(((ErrorResponse)response.payload()).errorMessage());
                 case "SUCCESS" -> {}
                 default -> throw new RuntimeException("Unknown response");
             }
@@ -29,6 +30,7 @@ public class SocketService
         }
         catch (IOException e)
         {
+            e.printStackTrace();
             throw new RuntimeException("Could not connect to server!");
         }
         catch (ClassNotFoundException e)

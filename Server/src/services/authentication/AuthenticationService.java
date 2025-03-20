@@ -1,4 +1,4 @@
-﻿package services.authentication;
+package services.authentication;
 
 import dtos.auth.LoginRequest;
 import dtos.auth.RegisterUserRequest;

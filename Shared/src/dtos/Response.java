@@ -1,4 +1,7 @@
-﻿package dtos;
+package dtos;
 
-public record Response(String status, Object payload) {
+import java.io.Serializable;
+
+public record Response(String status, Object payload) implements Serializable
+{
 }

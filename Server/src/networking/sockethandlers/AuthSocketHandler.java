@@ -1,4 +1,4 @@
-﻿package networking.sockethandlers;
+package networking.sockethandlers;
 
 import dtos.auth.LoginRequest;
 import dtos.auth.RegisterUserRequest;

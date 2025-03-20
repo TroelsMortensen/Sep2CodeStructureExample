@@ -1,4 +1,4 @@
-﻿package startup;
+package startup;
 
 import networking.Server;
 

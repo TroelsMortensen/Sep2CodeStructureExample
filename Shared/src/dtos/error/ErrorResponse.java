@@ -1,4 +1,7 @@
-﻿package dtos.error;
+package dtos.error;
 
-public record ErrorResponse(String errorMessage) {
+import java.io.Serializable;
+
+public record ErrorResponse(String errorMessage) implements Serializable
+{
 }

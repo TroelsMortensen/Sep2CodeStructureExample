@@ -1,4 +1,4 @@
-﻿package model.exceptions;
+package model.exceptions;
 
 public class BusinessLogicException extends RuntimeException {
     public BusinessLogicException(String message) {

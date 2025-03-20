@@ -1,4 +1,4 @@
-﻿package model.entities;
+package model.entities;
 
 public class User {
     private String email;

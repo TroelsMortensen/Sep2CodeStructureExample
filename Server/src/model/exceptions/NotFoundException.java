@@ -1,4 +1,4 @@
-﻿package model.exceptions;
+package model.exceptions;
 
 public class NotFoundException extends RuntimeException{
     public NotFoundException(String message) {
