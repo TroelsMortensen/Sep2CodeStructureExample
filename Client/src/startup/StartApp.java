@@ -1,18 +1,15 @@
 package startup;
 
-import dtos.Request;
-import dtos.auth.RegisterUserRequest;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import networking.authentication.SocketService;
 
 public class StartApp extends Application
 {
     @Override
     public void start(Stage stage) throws Exception
     {
-        stage.setHeight(400);
-        stage.setWidth(600);
+        stage.setMinHeight(400);
+        stage.setMinWidth(600);
         ViewHandler viewHandler = new ViewHandler(stage);
         viewHandler.start();
     }

@@ -5,9 +5,10 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.register.RegisterController">
+<AnchorPane maxHeight="400.0" maxWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.register.RegisterController">
    <children>
       <TextField fx:id="emailInput" layoutX="226.0" layoutY="26.0" prefHeight="25.0" prefWidth="359.0" />
       <TextField fx:id="firstNameInput" layoutX="226.0" layoutY="63.0" prefHeight="25.0" prefWidth="359.0" />
@@ -20,7 +21,11 @@
       <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="228.0" prefHeight="17.0" prefWidth="558.0" />
       <PasswordField fx:id="passwordInput" layoutX="226.0" layoutY="134.0" prefHeight="25.0" prefWidth="359.0" />
       <PasswordField fx:id="repeatPasswordInput" layoutX="226.0" layoutY="167.0" prefHeight="25.0" prefWidth="359.0" />
-      <Button fx:id="buttonRegister" layoutX="270.0" layoutY="267.0" mnemonicParsing="false" onAction="#onRegister" text="Register" />
+      <Button fx:id="buttonRegister" layoutX="211.0" layoutY="284.0" mnemonicParsing="false" onAction="#onRegister" text="Register">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Button>
       <Button layoutX="15.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack" text="&lt; Back" />
    </children>
 </AnchorPane>
