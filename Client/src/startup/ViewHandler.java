@@ -46,8 +46,8 @@ public class ViewHandler
     private static void openRegisterView() throws IOException
     {
         AuthenticationService service = new SocketAuthenticationService();
-        RegisterVM vm = new RegisterVM();
-        RegisterController controller = new RegisterController();
+        RegisterVM vm = new RegisterVM(service);
+        RegisterController controller = new RegisterController(vm);
         String viewTitle = "Register";
         String viewSubPath = "register/Register.fxml";
         openView(viewTitle, viewSubPath, controller);
