@@ -10,6 +10,7 @@ import networking.user.UsersClient;
 import ui.common.Controller;
 import ui.login.LoginController;
 import ui.login.LoginVM;
+import ui.popup.PopupController;
 import ui.register.RegisterController;
 import ui.register.RegisterVM;
 import ui.viewusers.ViewUsersController;
@@ -50,6 +51,30 @@ public class ViewHandler
         {
             e.printStackTrace();
         }
+    }
+
+    public static void popupMessage(String message)
+    {
+        Stage stage = new Stage();
+        stage.setWidth(300);
+        stage.setHeight(200);
+
+        PopupController controller = new PopupController(stage, message);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(ViewHandler.class.getResource("../ui/popup/Popup.fxml"));
+        fxmlLoader.setControllerFactory(ignore -> controller);
+
+        try
+        {
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setTitle("Error");
+            stage.setScene(scene);
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+        stage.show();
     }
 
     private static void openUsersOverview() throws IOException
