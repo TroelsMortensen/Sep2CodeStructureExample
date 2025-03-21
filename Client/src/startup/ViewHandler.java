@@ -57,10 +57,10 @@ public class ViewHandler
     public static void popupMessage(MessageType type, String message) // currently always an error, will fix later for success message too.
     {
         Stage stage = new Stage();
-        stage.setWidth(300);
-        stage.setHeight(200);
+        stage.setMinWidth(300);
+        stage.setMinHeight(200);
 
-        PopupController controller = new PopupController(stage, message);
+        PopupController controller = new PopupController(stage, type, message);
 
         FXMLLoader fxmlLoader = new FXMLLoader(ViewHandler.class.getResource("../ui/popup/Popup.fxml"));
         fxmlLoader.setControllerFactory(ignore -> controller);

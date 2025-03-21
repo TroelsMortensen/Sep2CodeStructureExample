@@ -63,7 +63,7 @@ public class UserListRepository implements UserRepository
     {
         // simulate updating user, by first removing existing, then inserting updated user
         users.removeIf(usr -> usr.getEmail().equals(user.getEmail()));
-
+        System.out.println("updated: " + user);
         users.add(user);
     }
 

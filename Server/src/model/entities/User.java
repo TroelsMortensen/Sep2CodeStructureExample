@@ -60,4 +60,18 @@ public class User {
     {
         return blacklistReason;
     }
+
+    @Override
+    public String toString()
+    {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isAdmin=" + isAdmin +
+                ", isBlacklisted=" + isBlacklisted +
+                ", blacklistReason='" + blacklistReason + '\'' +
+                '}';
+    }
 }
