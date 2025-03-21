@@ -18,7 +18,6 @@ public class PopupController
         this.stage = stage;
         this.type = type;
         this.message = message;
-
     }
 
     public void initialize()
