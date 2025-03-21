@@ -4,8 +4,9 @@ import dtos.Request;
 import dtos.auth.LoginRequest;
 import dtos.auth.RegisterUserRequest;
 import dtos.user.UserDataDto;
+import networking.SocketService;
 
-public class SocketAuthenticationService implements AuthenticationService
+public class SocketAuthenticationClient implements AuthenticationClient
 {
     @Override
     public void registerUser(RegisterUserRequest user)

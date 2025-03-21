@@ -1,8 +1,9 @@
-package networking.authentication;
+package networking;
 
 import dtos.Request;
 import dtos.Response;
 import dtos.error.ErrorResponse;
+import utils.StringUtils;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,18 +20,18 @@ public class SocketService
         {
             outputStream.writeObject(request);
             Response response = (Response) inputStream.readObject();
-
-            switch (response.status())
+            if (response.status().equals("SUCCESS"))
             {
-                case "ERROR", "SERVER_FAILURE" ->
-                        throw new RuntimeException(((ErrorResponse) response.payload()).errorMessage());
-                case "SUCCESS" ->
-                {
-                }
-                default -> throw new RuntimeException("Unknown response");
+                return response.payload();
             }
-
-            return response.payload();
+            else if (StringUtils.equalsAny(response.status(), "ERROR", "SERVER_FAILURE"))
+            {
+                throw new RuntimeException(((ErrorResponse) response.payload()).errorMessage());
+            }
+            else
+            {
+                throw new RuntimeException("Unknown server status code: " + response.status());
+            }
         }
         catch (IOException e)
         {

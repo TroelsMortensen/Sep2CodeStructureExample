@@ -1,4 +1,7 @@
 package dtos.user;
 
-public record UpdatePasswordRequest(String email, String oldPassword, String newPassword) {
+import java.io.Serializable;
+
+public record UpdatePasswordRequest(String email, String oldPassword, String newPassword) implements Serializable
+{
 }

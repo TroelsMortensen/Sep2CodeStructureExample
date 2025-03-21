@@ -5,7 +5,7 @@ import dtos.user.PromoteUserRequest;
 import dtos.user.UpdatePasswordRequest;
 import dtos.user.ViewUsers;
 import model.entities.User;
-import model.exceptions.BusinessLogicException;
+import model.exceptions.ServerException;
 import model.exceptions.NotFoundException;
 import persistence.repositories.user.UserRepository;
 
@@ -35,11 +35,11 @@ public class UserServiceImpl implements UserService {
 
         // validate
         if (user.isBlacklisted()) {
-            throw new BusinessLogicException("The user with email '" + request.email() + "' is blacklisted, and cannot be promoted to admin.");
+            throw new ServerException("The user with email '" + request.email() + "' is blacklisted, and cannot be promoted to admin.");
         }
 
         if (user.isAdmin()) {
-            throw new BusinessLogicException("The user with email '" + request.email() + "' is already an admin.");
+            throw new ServerException("The user with email '" + request.email() + "' is already an admin.");
         }
 
         // update
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
             throw new NotFoundException("User with email '" + request.email() + "' not found.");
         }
         if (user.isBlacklisted()) {
-            throw new BusinessLogicException("The user with email '" + request.email() + "' is already blacklisted.");
+            throw new ServerException("The user with email '" + request.email() + "' is already blacklisted.");
         }
         user.blacklist(request.reason()); // Alternatively I could have a setBlackList(true, request.reason()) method. I prefer this clearer approach.
         user.setAdmin(false); // admins are automatically demoted when blacklisted.
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
         // I could add admin status or black list status, if needed.
 
         for (User user : users) {
-            ViewUsers.UserDisplayDto dto = new ViewUsers.UserDisplayDto(user.getEmail(), user.getFirstName(), user.getLastName());
+            ViewUsers.UserDisplayDto dto = new ViewUsers.UserDisplayDto(user.getEmail(), user.getFirstName(), user.getLastName(), user.isBlacklisted());
             result.add(dto);
         }
 
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
 
         // validate
         if(!user.getPassword().equals(request.oldPassword())){
-            throw new BusinessLogicException("Incorrect password");
+            throw new ServerException("Incorrect password");
         }
 
         // update

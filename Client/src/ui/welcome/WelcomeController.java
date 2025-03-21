@@ -6,14 +6,9 @@ import ui.common.Controller;
 
 public class WelcomeController implements Controller
 {
-
-
-    public WelcomeController()
-    {
-    }
-
     public void openLoginView()
     {
+        ViewHandler.showView(ViewType.LOGIN);
     }
 
     public void openRegisterView()

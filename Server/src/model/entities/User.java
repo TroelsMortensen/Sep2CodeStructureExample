@@ -55,4 +55,9 @@ public class User {
     public void setPassword(String newPassword) {
         password = newPassword;
     }
+
+    public String getBlacklistReason()
+    {
+        return blacklistReason;
+    }
 }

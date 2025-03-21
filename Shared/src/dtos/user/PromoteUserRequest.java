@@ -1,4 +1,7 @@
 package dtos.user;
 
-public record PromoteUserRequest(String email) {
+import java.io.Serializable;
+
+public record PromoteUserRequest(String email) implements Serializable
+{
 }

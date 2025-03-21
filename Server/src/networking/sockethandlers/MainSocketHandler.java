@@ -3,9 +3,8 @@ package networking.sockethandlers;
 import dtos.Request;
 import dtos.Response;
 import dtos.error.ErrorResponse;
-import model.exceptions.BusinessLogicException;
+import model.exceptions.ServerException;
 import model.exceptions.NotFoundException;
-import model.exceptions.ValidationException;
 import networking.exceptions.InvalidActionException;
 import startup.ServiceLocator;
 
@@ -63,7 +62,7 @@ public class MainSocketHandler implements Runnable
         {
             handleRequest(incomingData, outgoingData);
         }
-        catch (ValidationException | BusinessLogicException | NotFoundException | InvalidActionException e)
+        catch (ServerException | NotFoundException | InvalidActionException e)
         {
             ErrorResponse payload = new ErrorResponse(e.getMessage());
             Response error = new Response("ERROR", payload);

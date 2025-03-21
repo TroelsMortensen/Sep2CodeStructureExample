@@ -3,11 +3,17 @@ package startup;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import networking.authentication.AuthenticationService;
-import networking.authentication.SocketAuthenticationService;
+import networking.authentication.AuthenticationClient;
+import networking.authentication.SocketAuthenticationClient;
+import networking.user.SocketUsersClient;
+import networking.user.UsersClient;
 import ui.common.Controller;
+import ui.login.LoginController;
+import ui.login.LoginVM;
 import ui.register.RegisterController;
 import ui.register.RegisterVM;
+import ui.viewusers.ViewUsersController;
+import ui.viewusers.ViewUsersVM;
 import ui.welcome.WelcomeController;
 
 import java.io.IOException;
@@ -35,17 +41,40 @@ public class ViewHandler
             {
                 case WELCOME -> openWelcomeView();
                 case REGISTER -> openRegisterView();
+                case LOGIN -> openLoginView();
+                case VIEWUSERS -> openUsersOverview();
                 default -> throw new RuntimeException("View not found.");
             }
-        } catch (IOException e)
+        }
+        catch (IOException e)
         {
             e.printStackTrace();
         }
     }
 
+    private static void openUsersOverview() throws IOException
+    {
+        UsersClient client = new SocketUsersClient();
+        ViewUsersVM vm = new ViewUsersVM(client);
+        ViewUsersController controller = new ViewUsersController(vm);
+        String viewTitle = "Overview";
+        String viewSubPath = "viewusers/ViewUsers.fxml";
+        openView(viewTitle, viewSubPath, controller);
+    }
+
+    private static void openLoginView() throws IOException
+    {
+        AuthenticationClient service = new SocketAuthenticationClient();
+        LoginVM vm = new LoginVM(service);
+        LoginController controller = new LoginController(vm);
+        String viewTitle = "Login";
+        String viewSubPath = "login/Login.fxml";
+        openView(viewTitle, viewSubPath, controller);
+    }
+
     private static void openRegisterView() throws IOException
     {
-        AuthenticationService service = new SocketAuthenticationService();
+        AuthenticationClient service = new SocketAuthenticationClient();
         RegisterVM vm = new RegisterVM(service);
         RegisterController controller = new RegisterController(vm);
         String viewTitle = "Register";

@@ -7,7 +7,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import networking.authentication.AuthenticationService;
+import networking.authentication.AuthenticationClient;
 import startup.ViewHandler;
 import startup.ViewType;
 import state.AppState;
@@ -20,9 +20,9 @@ public class LoginVM
     private final StringProperty messageProp = new SimpleStringProperty();
     private final BooleanProperty enableLoginButtonProp = new SimpleBooleanProperty(true);
 
-    private final AuthenticationService authService;
+    private final AuthenticationClient authService;
 
-    public LoginVM(AuthenticationService authService)
+    public LoginVM(AuthenticationClient authService)
     {
         this.authService = authService;
         emailProp.addListener(this::updateRegisterButtonState);

@@ -3,7 +3,7 @@ package ui.register;
 import dtos.auth.RegisterUserRequest;
 import javafx.beans.Observable;
 import javafx.beans.property.*;
-import networking.authentication.AuthenticationService;
+import networking.authentication.AuthenticationClient;
 import utils.StringUtils;
 
 public class RegisterVM
@@ -17,9 +17,9 @@ public class RegisterVM
 
     private final StringProperty messageProp = new SimpleStringProperty();
     private final BooleanProperty enableRegisterButtonProp = new SimpleBooleanProperty(true);
-    private final AuthenticationService authService;
+    private final AuthenticationClient authService;
 
-    public RegisterVM(AuthenticationService authService)
+    public RegisterVM(AuthenticationClient authService)
     {
         this.authService = authService;
         emailProp.addListener(this::updateRegisterButtonState);
