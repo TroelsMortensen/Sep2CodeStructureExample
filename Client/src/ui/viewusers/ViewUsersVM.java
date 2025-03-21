@@ -108,7 +108,6 @@ public class ViewUsersVM
 
     private void updateEnablePromoteAndBlacklistButtons(Observable observable)
     {
-        System.out.println("here");
         boolean shouldDisable = selectedIndexProp.get() < 0;
         disablePromoteButtonProp.set(shouldDisable);
         disableBlacklistButtonProp.set(shouldDisable);
