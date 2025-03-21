@@ -1,4 +1,4 @@
-package networking.sockethandlers;
+package networking.requesthandlers;
 
 import dtos.user.BlacklistUserRequest;
 import dtos.user.PromoteUserRequest;
@@ -6,10 +6,10 @@ import dtos.user.UpdatePasswordRequest;
 import dtos.user.ViewUsers;
 import services.user.UserService;
 
-public class UserSocketHandler implements SocketHandler {
+public class UserRequestHandler implements SocketHandler {
     private final UserService userService;
 
-    public UserSocketHandler(UserService userService) {
+    public UserRequestHandler(UserService userService) {
         this.userService = userService;
     }
 

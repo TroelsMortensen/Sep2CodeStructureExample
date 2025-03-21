@@ -1,4 +1,4 @@
-package networking.sockethandlers;
+package networking.requesthandlers;
 
 import dtos.Request;
 import dtos.Response;

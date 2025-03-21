@@ -29,7 +29,11 @@ public class ViewUsersController implements Controller
         promoteButton.visibleProperty().bind(vm.showPromoteButtonPropProperty());
         blacklistButton.visibleProperty().bind(vm.showBlacklistButtonPropProperty());
         changePasswordButton.disableProperty().bind(vm.enableChangePasswordPropProperty());
+
         table.setItems(vm.getUsersList());
+        table.setEditable(false);
+        table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        vm.getSelectedIndexProperty().bind(table.getSelectionModel().selectedIndexProperty());
 
         firstNameColumn.setCellValueFactory(param -> param.getValue().firstNamePropProperty());
         lastNameColumn.setCellValueFactory(param -> param.getValue().lastNamePropProperty());
@@ -39,6 +43,7 @@ public class ViewUsersController implements Controller
 
     public void onPromote()
     {
+        vm.promote();
     }
 
     public void onBlacklist()
@@ -50,7 +55,7 @@ public class ViewUsersController implements Controller
 
     }
 
-    public void onSort(SortEvent<TableView> tableViewSortEvent)
+    public void onSort(SortEvent<TableView<UserFx>> tableViewSortEvent)
     {
         // not sure what this can do.. will investigate
     }

@@ -1,14 +1,14 @@
-package networking.sockethandlers;
+package networking.requesthandlers;
 
 import dtos.auth.LoginRequest;
 import dtos.auth.RegisterUserRequest;
 import networking.exceptions.InvalidActionException;
 import services.authentication.AuthenticationService;
 
-public class AuthSocketHandler implements SocketHandler {
+public class AuthRequestHandler implements SocketHandler {
     private final AuthenticationService authenticationService;
 
-    public AuthSocketHandler(AuthenticationService authenticationService) {
+    public AuthRequestHandler(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 

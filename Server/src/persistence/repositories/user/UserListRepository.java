@@ -11,6 +11,7 @@ public class UserListRepository implements UserRepository
 {
 
     private final static List<User> users = new ArrayList<>(Arrays.asList(
+            new User("trmo@via.dk", "1234", "Troels", "Mortensen"),
             new User("jaja@gmail.com", "1234", "Jakob", "Jakobsen"),
             new User("pepe@gmail.com", "1234", "Peter", "Petersen"),
             new User("jeje@gmail.com", "1234", "Jens", "Jensen"),
@@ -20,9 +21,7 @@ public class UserListRepository implements UserRepository
 
     public UserListRepository()
     {
-        User user = new User("trmo@via.dk", "1234", "Troels", "Mortensen");
-        user.setAdmin(true);
-        users.add(user);
+        users.get(0).setAdmin(true);
     }
 
     @Override

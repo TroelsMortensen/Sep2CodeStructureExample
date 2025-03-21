@@ -1,6 +1,7 @@
 package networking.user;
 
 import dtos.Request;
+import dtos.user.PromoteUserRequest;
 import dtos.user.ViewUsers;
 import networking.SocketService;
 
@@ -13,5 +14,12 @@ public class SocketUsersClient implements UsersClient
     {
         Request request = new Request("users", "view_users", new ViewUsers.Request(0, 100, null));
         return (List<ViewUsers.UserDisplayDto>) SocketService.sendRequest(request);
+    }
+
+    @Override
+    public void promoteUser(PromoteUserRequest promoteRequest)
+    {
+        Request request = new Request("users", "promote", promoteRequest);
+        SocketService.sendRequest(request);
     }
 }

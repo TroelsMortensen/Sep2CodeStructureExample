@@ -10,6 +10,7 @@ import networking.user.UsersClient;
 import ui.common.Controller;
 import ui.login.LoginController;
 import ui.login.LoginVM;
+import ui.popup.MessageType;
 import ui.popup.PopupController;
 import ui.register.RegisterController;
 import ui.register.RegisterVM;
@@ -53,7 +54,7 @@ public class ViewHandler
         }
     }
 
-    public static void popupMessage(String message)
+    public static void popupMessage(MessageType type, String message) // currently always an error, will fix later for success message too.
     {
         Stage stage = new Stage();
         stage.setWidth(300);

@@ -1,6 +1,4 @@
-package networking.sockethandlers;
-
-import startup.ServiceLocator;
+package networking.requesthandlers;
 
 
 // This interface serves little purpose other than ensuring consistency across different specific SocketHandlers.

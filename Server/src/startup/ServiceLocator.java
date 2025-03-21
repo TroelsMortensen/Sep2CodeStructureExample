@@ -1,8 +1,8 @@
 package startup;
 
-import networking.sockethandlers.AuthSocketHandler;
-import networking.sockethandlers.SocketHandler;
-import networking.sockethandlers.UserSocketHandler;
+import networking.requesthandlers.AuthRequestHandler;
+import networking.requesthandlers.SocketHandler;
+import networking.requesthandlers.UserRequestHandler;
 import persistence.repositories.user.UserListRepository;
 import services.authentication.AuthServiceImpl;
 import services.authentication.AuthenticationService;
@@ -17,11 +17,11 @@ public class ServiceLocator {
     // we can do that a single place, and it will take effect across the entire application.
 
     public SocketHandler getAuthenticationSocketHandler() {
-        return new AuthSocketHandler(getAuthenticationService());
+        return new AuthRequestHandler(getAuthenticationService());
     }
 
     public SocketHandler getUserSocketHandler(){
-        return new UserSocketHandler(getUserService());
+        return new UserRequestHandler(getUserService());
     }
 
     private static AuthenticationService getAuthenticationService() {
