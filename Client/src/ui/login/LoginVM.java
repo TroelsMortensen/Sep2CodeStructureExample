@@ -18,15 +18,15 @@ public class LoginVM
     private final StringProperty emailProp = new SimpleStringProperty();
     private final StringProperty passwordProp = new SimpleStringProperty();
     private final StringProperty messageProp = new SimpleStringProperty();
-    private final BooleanProperty enableLoginButtonProp = new SimpleBooleanProperty(true);
+    private final BooleanProperty disableLoginButtonProp = new SimpleBooleanProperty(true);
 
     private final AuthenticationClient authService;
 
     public LoginVM(AuthenticationClient authService)
     {
         this.authService = authService;
-        emailProp.addListener(this::updateRegisterButtonState);
-        passwordProp.addListener(this::updateRegisterButtonState);
+        emailProp.addListener(this::updateLoginButtonState);
+        passwordProp.addListener(this::updateLoginButtonState);
     }
 
     public StringProperty emailProperty()
@@ -46,16 +46,16 @@ public class LoginVM
 
     public BooleanProperty enableLoginButtonProperty()
     {
-        return enableLoginButtonProp;
+        return disableLoginButtonProp;
     }
 
-    private void updateRegisterButtonState(Observable observable)
+    private void updateLoginButtonState(Observable observable)
     {
         boolean shouldDisable =
                 StringUtils.isNullOrEmpty(emailProp.get()) ||
                         StringUtils.isNullOrEmpty(passwordProp.get());
 
-        enableLoginButtonProp.set(shouldDisable);
+        disableLoginButtonProp.set(shouldDisable);
     }
 
     public void login()

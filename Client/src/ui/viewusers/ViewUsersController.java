@@ -1,9 +1,6 @@
 package ui.viewusers;
 
-import dtos.user.UserDataDto;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import ui.common.Controller;
 
 public class ViewUsersController implements Controller
@@ -27,8 +24,12 @@ public class ViewUsersController implements Controller
     {
         vm.loadUsers();
         promoteButton.visibleProperty().bind(vm.showPromoteButtonPropProperty());
+        promoteButton.disableProperty().bind(vm.disablePromoteButtonProp());
+
         blacklistButton.visibleProperty().bind(vm.showBlacklistButtonPropProperty());
-        changePasswordButton.disableProperty().bind(vm.enableChangePasswordPropProperty());
+        blacklistButton.disableProperty().bind(vm.disableBlacklistButtonProp());
+
+        changePasswordButton.disableProperty().bind(vm.disableChangePasswordButtonPropProperty());
 
         table.setItems(vm.getUsersList());
         table.setEditable(false);
@@ -48,6 +49,7 @@ public class ViewUsersController implements Controller
 
     public void onBlacklist()
     {
+        vm.blacklist();
     }
 
     public void onChangePassword()

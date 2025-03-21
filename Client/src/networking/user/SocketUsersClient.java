@@ -1,6 +1,7 @@
 package networking.user;
 
 import dtos.Request;
+import dtos.user.BlacklistUserRequest;
 import dtos.user.PromoteUserRequest;
 import dtos.user.ViewUsers;
 import networking.SocketService;
@@ -20,6 +21,13 @@ public class SocketUsersClient implements UsersClient
     public void promoteUser(PromoteUserRequest promoteRequest)
     {
         Request request = new Request("users", "promote", promoteRequest);
+        SocketService.sendRequest(request);
+    }
+
+    @Override
+    public void blacklist(BlacklistUserRequest blacklistRequest)
+    {
+        Request request = new Request("users", "blacklist", blacklistRequest);
         SocketService.sendRequest(request);
     }
 }

@@ -8,24 +8,24 @@
 <AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.popup.PopupController">
    <children>
       <Button layoutX="135.0" layoutY="161.0" mnemonicParsing="false" onAction="#onClose" text="Close" />
-      <Label fx:id="messageLabel" alignment="TOP_CENTER" layoutY="42.0" prefHeight="119.0" prefWidth="315.0" text="Label">
+      <Label fx:id="messageLabel" alignment="TOP_CENTER" layoutY="42.0" prefHeight="119.0" prefWidth="315.0" text="Label" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="3.0" layoutY="2.0" prefHeight="25.0" prefWidth="310.0" text="ERROR!" textFill="RED">
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="3.0" layoutY="2.0" prefHeight="25.0" prefWidth="310.0" text="ERROR!" textAlignment="CENTER" textFill="RED" underline="true">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="warningLabel" alignment="CENTER" layoutX="3.0" layoutY="2.0" prefHeight="25.0" prefWidth="310.0" text="WARNING!" textFill="#fffd00">
+      <Label fx:id="warningLabel" alignment="CENTER" layoutX="3.0" layoutY="2.0" prefHeight="25.0" prefWidth="310.0" text="WARNING!" textAlignment="CENTER" textFill="#ffbf00" underline="true">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="successLabel" alignment="CENTER" layoutX="3.0" layoutY="2.0" prefHeight="25.0" prefWidth="310.0" text="SUCCESS!" textFill="#00da16">
+      <Label fx:id="successLabel" alignment="CENTER" layoutX="3.0" layoutY="2.0" prefHeight="25.0" prefWidth="310.0" text="SUCCESS!" textAlignment="CENTER" textFill="#00da16" underline="true">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
    </children>
