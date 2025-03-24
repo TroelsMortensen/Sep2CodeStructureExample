@@ -2,4 +2,4 @@ This is a small system, to use as an example for SEP2. It illustrates how such a
 
 This is the latest class diagram:
 
-[class diagram](ClassDiagram.png)
+![class diagram](ClassDiagram.png)
