@@ -6,19 +6,24 @@ import dtos.user.UpdatePasswordRequest;
 import dtos.user.ViewUsers;
 import services.user.UserService;
 
-public class UserRequestHandler implements SocketHandler {
+public class UserRequestHandler implements RequestHandler
+{
     private final UserService userService;
 
-    public UserRequestHandler(UserService userService) {
+    public UserRequestHandler(UserService userService)
+    {
         this.userService = userService;
     }
 
     @Override
-    public Object handle(String action, Object payload) {
-        switch (action){
+    public Object handle(String action, Object payload)
+    {
+        switch (action)
+        {
             case "blacklist" -> userService.blacklistUser((BlacklistUserRequest) payload);
             case "promote" -> userService.promoteToAdmin((PromoteUserRequest) payload);
-            case "view_users" -> {
+            case "view_users" ->
+            {
                 return userService.getUsersOverview((ViewUsers.Request) payload);
             }
             case "update_password" -> userService.updatePassword((UpdatePasswordRequest) payload);

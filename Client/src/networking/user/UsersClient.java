@@ -9,8 +9,6 @@ import java.util.List;
 public interface UsersClient
 {
     List<ViewUsers.UserDisplayDto> getUsers();
-
     void promoteUser(PromoteUserRequest request);
-
     void blacklist(BlacklistUserRequest request);
 }

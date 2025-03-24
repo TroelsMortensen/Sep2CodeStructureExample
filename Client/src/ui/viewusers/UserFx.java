@@ -21,17 +21,17 @@ public class UserFx
         isBlacklisted.set(user.isBlacklisted());
     }
 
-    public StringProperty emailPropProperty()
+    public StringProperty emailProperty()
     {
         return emailProp;
     }
 
-    public StringProperty firstNamePropProperty()
+    public StringProperty firstNameProperty()
     {
         return firstNameProp;
     }
 
-    public StringProperty lastNamePropProperty()
+    public StringProperty lastNameProperty()
     {
         return lastNameProp;
     }

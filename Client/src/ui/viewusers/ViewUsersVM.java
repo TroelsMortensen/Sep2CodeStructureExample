@@ -8,10 +8,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableView;
 import networking.user.UsersClient;
 import startup.ViewHandler;
 import state.AppState;
@@ -45,21 +43,21 @@ public class ViewUsersVM
         int index = selectedIndexProp.get();
         if (index < 0) return;
         UserFx userFx = users.get(index);
-        boolean shouldDisable = !userFx.emailPropProperty().get().equals(AppState.getCurrentUser().email());
+        boolean shouldDisable = !userFx.emailProperty().get().equals(AppState.getCurrentUser().email());
         disableChangePasswordButtonProp.set(shouldDisable);
     }
 
-    public BooleanProperty showPromoteButtonPropProperty()
+    public BooleanProperty showPromoteButtonProperty()
     {
         return showPromoteButtonProp;
     }
 
-    public BooleanProperty showBlacklistButtonPropProperty()
+    public BooleanProperty showBlacklistButtonProperty()
     {
         return showBlacklistButtonProp;
     }
 
-    public BooleanProperty disableChangePasswordButtonPropProperty()
+    public BooleanProperty disableChangePasswordButtonProperty()
     {
         return disableChangePasswordButtonProp;
     }
@@ -84,11 +82,6 @@ public class ViewUsersVM
     public ObservableList<UserFx> getUsersList()
     {
         return users;
-    }
-
-    public ObservableValue<? extends TableView.TableViewSelectionModel<UserFx>> getSelectionProperty()
-    {
-        return null;
     }
 
     public IntegerProperty getSelectedIndexProperty()
@@ -118,11 +111,11 @@ public class ViewUsersVM
         int index = selectedIndexProp.get();
 
         UserFx user = users.get(index);
-        PromoteUserRequest request = new PromoteUserRequest(user.emailPropProperty().get());
+        PromoteUserRequest request = new PromoteUserRequest(user.emailProperty().get());
         try
         {
             userService.promoteUser(request);
-            ViewHandler.popupMessage(MessageType.SUCCESS, user.firstNamePropProperty().get() + " has been promoted to admin!");
+            ViewHandler.popupMessage(MessageType.SUCCESS, user.firstNameProperty().get() + " has been promoted to admin!");
         }
         catch (Exception e)
         {
@@ -136,23 +129,22 @@ public class ViewUsersVM
 
         UserFx user = users.get(index);
 
-        if (AppState.getCurrentUser().email().equals(user.emailPropProperty().get()))
+        if (AppState.getCurrentUser().email().equals(user.emailProperty().get()))
         {
             ViewHandler.popupMessage(MessageType.ERROR, "You cannot blacklist yourself, dummy.");
             return;
         }
 
-        BlacklistUserRequest request = new BlacklistUserRequest(user.emailPropProperty().get(), "Eventually I will come up with a good reason"); // TODO I should show a popup with a text field, I guess.. eventually
+        BlacklistUserRequest request = new BlacklistUserRequest(user.emailProperty().get(), "Eventually I will come up with a good reason"); // TODO I should show a popup with a text field, I guess.. eventually
         try
         {
             userService.blacklist(request);
             user.isBlacklistedProperty().set(true);
-            ViewHandler.popupMessage(MessageType.WARNING, user.firstNamePropProperty().get() + " has been blacklisted!");
+            ViewHandler.popupMessage(MessageType.WARNING, user.firstNameProperty().get() + " has been blacklisted!");
         }
         catch (Exception e)
         {
             ViewHandler.popupMessage(MessageType.ERROR, e.getMessage());
         }
     }
-
 }

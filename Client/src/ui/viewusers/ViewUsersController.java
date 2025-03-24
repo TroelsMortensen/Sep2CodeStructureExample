@@ -23,22 +23,22 @@ public class ViewUsersController implements Controller
     public void initialize()
     {
         vm.loadUsers();
-        promoteButton.visibleProperty().bind(vm.showPromoteButtonPropProperty());
+        promoteButton.visibleProperty().bind(vm.showPromoteButtonProperty());
         promoteButton.disableProperty().bind(vm.disablePromoteButtonProp());
 
-        blacklistButton.visibleProperty().bind(vm.showBlacklistButtonPropProperty());
+        blacklistButton.visibleProperty().bind(vm.showBlacklistButtonProperty());
         blacklistButton.disableProperty().bind(vm.disableBlacklistButtonProp());
 
-        changePasswordButton.disableProperty().bind(vm.disableChangePasswordButtonPropProperty());
+        changePasswordButton.disableProperty().bind(vm.disableChangePasswordButtonProperty());
 
         table.setItems(vm.getUsersList());
         table.setEditable(false);
         table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         vm.getSelectedIndexProperty().bind(table.getSelectionModel().selectedIndexProperty());
 
-        firstNameColumn.setCellValueFactory(param -> param.getValue().firstNamePropProperty());
-        lastNameColumn.setCellValueFactory(param -> param.getValue().lastNamePropProperty());
-        emailColumn.setCellValueFactory(param -> param.getValue().emailPropProperty());
+        firstNameColumn.setCellValueFactory(param -> param.getValue().firstNameProperty());
+        lastNameColumn.setCellValueFactory(param -> param.getValue().lastNameProperty());
+        emailColumn.setCellValueFactory(param -> param.getValue().emailProperty());
         blacklistedColumn.setCellValueFactory(param -> param.getValue().isBlacklistedProperty());
     }
 

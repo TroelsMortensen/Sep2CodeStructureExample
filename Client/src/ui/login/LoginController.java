@@ -10,8 +10,6 @@ import ui.common.Controller;
 
 public class LoginController implements Controller
 {
-
-
     public Label messageLabel;
     public PasswordField passwordInput;
     public TextField emailInput;

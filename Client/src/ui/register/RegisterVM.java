@@ -16,7 +16,7 @@ public class RegisterVM
 
 
     private final StringProperty messageProp = new SimpleStringProperty();
-    private final BooleanProperty enableRegisterButtonProp = new SimpleBooleanProperty(true);
+    private final BooleanProperty disableRegisterButtonProp = new SimpleBooleanProperty(true);
     private final AuthenticationClient authService;
 
     public RegisterVM(AuthenticationClient authService)
@@ -99,7 +99,7 @@ public class RegisterVM
                         StringUtils.isNullOrEmpty(firstNameProp.get()) ||
                         StringUtils.isNullOrEmpty(lastNameProp.get());
 
-        enableRegisterButtonProp.set(shouldDisable);
+        disableRegisterButtonProp.set(shouldDisable);
     }
 
     public StringProperty emailProperty()
@@ -122,9 +122,9 @@ public class RegisterVM
         return messageProp;
     }
 
-    public BooleanProperty enableRegisterButtonProperty()
+    public BooleanProperty disableRegisterButtonProperty()
     {
-        return enableRegisterButtonProp;
+        return disableRegisterButtonProp;
     }
 
     public StringProperty firstNameProperty()

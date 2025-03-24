@@ -4,5 +4,6 @@ public enum ViewType
 {
     WELCOME,
     LOGIN,
-    VIEWUSERS, REGISTER
+    VIEWUSERS,
+    REGISTER
 }

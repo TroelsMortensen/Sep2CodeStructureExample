@@ -43,7 +43,7 @@ public class RegisterController implements Controller
 
         messageLabel.textProperty().bind(viewModel.messageProperty());
 
-        buttonRegister.disableProperty().bind(viewModel.enableRegisterButtonProperty());
+        buttonRegister.disableProperty().bind(viewModel.disableRegisterButtonProperty());
     }
 
     public void onRegister()

@@ -1,7 +1,7 @@
 package startup;
 
 import networking.requesthandlers.AuthRequestHandler;
-import networking.requesthandlers.SocketHandler;
+import networking.requesthandlers.RequestHandler;
 import networking.requesthandlers.UserRequestHandler;
 import persistence.repositories.user.UserListRepository;
 import services.authentication.AuthServiceImpl;
@@ -16,11 +16,11 @@ public class ServiceLocator {
     // If an implementation needs to be swapped out, e.g. repository implementations,
     // we can do that a single place, and it will take effect across the entire application.
 
-    public SocketHandler getAuthenticationSocketHandler() {
+    public RequestHandler getAuthenticationRequestHandler() {
         return new AuthRequestHandler(getAuthenticationService());
     }
 
-    public SocketHandler getUserSocketHandler(){
+    public RequestHandler getUserRequestHandler(){
         return new UserRequestHandler(getUserService());
     }
 

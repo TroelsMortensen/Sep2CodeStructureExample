@@ -20,17 +20,14 @@ public class SocketService
         {
             outputStream.writeObject(request);
             Response response = (Response) inputStream.readObject();
-            if (response.status().equals("SUCCESS"))
+            switch (response.status())
             {
-                return response.payload();
-            }
-            else if (StringUtils.equalsAny(response.status(), "ERROR", "SERVER_FAILURE"))
-            {
-                throw new RuntimeException(((ErrorResponse) response.payload()).errorMessage());
-            }
-            else
-            {
-                throw new RuntimeException("Unknown server status code: " + response.status());
+                case "SUCCESS" ->
+                {
+                    return response.payload();
+                }
+                case "ERROR" -> throw new RuntimeException(((ErrorResponse) response.payload()).errorMessage());
+                default -> throw new RuntimeException("Unknown server status code: " + response.status());
             }
         }
         catch (IOException e)

@@ -5,7 +5,8 @@ import dtos.auth.RegisterUserRequest;
 import networking.exceptions.InvalidActionException;
 import services.authentication.AuthenticationService;
 
-public class AuthRequestHandler implements SocketHandler {
+public class AuthRequestHandler implements RequestHandler
+{
     private final AuthenticationService authenticationService;
 
     public AuthRequestHandler(AuthenticationService authenticationService) {

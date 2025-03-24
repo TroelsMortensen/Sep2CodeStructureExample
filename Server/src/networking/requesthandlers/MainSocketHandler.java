@@ -87,10 +87,10 @@ public class MainSocketHandler implements Runnable
     private void handleRequest(ObjectInputStream incomingData, ObjectOutputStream outgoingData) throws IOException, ClassNotFoundException
     {
         Request request = (Request) incomingData.readObject();
-        SocketHandler handler = switch (request.handler())
+        RequestHandler handler = switch (request.handler())
         {
-            case "auth" -> serviceLocator.getAuthenticationSocketHandler();
-            case "users" -> serviceLocator.getUserSocketHandler();
+            case "auth" -> serviceLocator.getAuthenticationRequestHandler();
+            case "users" -> serviceLocator.getUserRequestHandler();
             default -> throw new IllegalStateException("Unexpected value: " + request.handler());
         };
 
