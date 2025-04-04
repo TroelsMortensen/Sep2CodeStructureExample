@@ -8,6 +8,9 @@ import services.authentication.AuthServiceImpl;
 import services.authentication.AuthenticationService;
 import services.user.UserService;
 import services.user.UserServiceImpl;
+import utilities.logging.ConsoleLogger;
+import utilities.logging.LogLevel;
+import utilities.logging.Logger;
 
 public class ServiceProvider
 {
@@ -25,6 +28,10 @@ public class ServiceProvider
 
     public RequestHandler getUserRequestHandler(){
         return new UserRequestHandler(getUserService());
+    }
+
+    public Logger getLogger(){
+        return new ConsoleLogger(LogLevel.WARNING);
     }
 
     private static AuthenticationService getAuthenticationService() {

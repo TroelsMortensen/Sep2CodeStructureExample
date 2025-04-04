@@ -1,6 +1,5 @@
 package networking;
 
-import networking.requesthandlers.MainSocketHandler;
 import startup.ServiceProvider;
 
 import java.io.IOException;
