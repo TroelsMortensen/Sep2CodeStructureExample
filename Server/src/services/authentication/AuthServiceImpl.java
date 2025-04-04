@@ -5,23 +5,23 @@ import dtos.auth.RegisterUserRequest;
 import dtos.user.UserDataDto;
 import model.entities.User;
 import model.exceptions.ServerException;
-import persistence.repositories.user.UserRepository;
+import persistence.daos.user.UserDao;
 
 public class AuthServiceImpl implements AuthenticationService
 {
 
-    private final UserRepository userRepository;
+    private final UserDao userDao;
 
-    public AuthServiceImpl(UserRepository userRepository)
+    public AuthServiceImpl(UserDao userDao)
     {
-        this.userRepository = userRepository;
+        this.userDao = userDao;
     }
 
 
     @Override
     public void registerUser(RegisterUserRequest request)
     {
-        User existingUser = userRepository.getSingle(request.email());
+        User existingUser = userDao.getSingle(request.email());
         if (existingUser != null)
         {
             throw new ServerException("Email is already in use.");
@@ -39,7 +39,7 @@ public class AuthServiceImpl implements AuthenticationService
                 request.lastName()
         );
 
-        userRepository.add(newUser);
+        userDao.add(newUser);
     }
 
     private static void validatePasswordIsCorrectFormat(String password)
@@ -70,7 +70,7 @@ public class AuthServiceImpl implements AuthenticationService
     @Override
     public UserDataDto login(LoginRequest request)
     {
-        User existingUser = userRepository.getSingle(request.email());
+        User existingUser = userDao.getSingle(request.email());
         if (existingUser == null)
         {
             throw new ServerException("User not found.");

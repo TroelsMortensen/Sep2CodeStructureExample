@@ -1,4 +1,4 @@
-package persistence.repositories.user;
+package persistence.daos.user;
 
 import model.entities.User;
 import utils.StringUtils;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class UserListRepository implements UserRepository
+public class UserListDao implements UserDao
 {
 
     private final static List<User> users = new ArrayList<>(Arrays.asList(
@@ -19,7 +19,7 @@ public class UserListRepository implements UserRepository
             new User("anan@gmail.com", "1234", "Anna", "Annasen")
     ));
 
-    public UserListRepository()
+    public UserListDao()
     {
         users.get(0).setAdmin(true);
     }
