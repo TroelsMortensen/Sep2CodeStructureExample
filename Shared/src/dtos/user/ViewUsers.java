@@ -9,6 +9,15 @@ public abstract class ViewUsers
 {
     public record Request(int pageIndex, int pageSize, String firstNameContains) implements Serializable
     {
+        @Override
+        public String toString()
+        {
+            return "Request{" +
+                    "pageIndex=" + pageIndex +
+                    ", pageSize=" + pageSize +
+                    ", firstNameContains='" + firstNameContains + '\'' +
+                    '}';
+        }
     }
 
     public record UserDisplayDto(String email, String firstName, String lastName, boolean isBlacklisted)
