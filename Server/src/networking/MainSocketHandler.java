@@ -8,9 +8,12 @@ import model.exceptions.NotFoundException;
 import networking.exceptions.InvalidActionException;
 import networking.requesthandlers.RequestHandler;
 import startup.ServiceProvider;
+import utilities.logging.LogLevel;
+import utilities.logging.Logger;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class MainSocketHandler implements Runnable
 {
@@ -25,11 +28,13 @@ public class MainSocketHandler implements Runnable
 
     private final Socket clientSocket;
     private final ServiceProvider serviceProvider;
+    private final Logger logger;
 
     public MainSocketHandler(Socket clientSocket, ServiceProvider serviceProvider)
     {
         this.clientSocket = clientSocket;
         this.serviceProvider = serviceProvider;
+        logger = serviceProvider.getLogger();
     }
 
     @Override
@@ -43,7 +48,7 @@ public class MainSocketHandler implements Runnable
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            logger.log(Arrays.toString(e.getStackTrace()), LogLevel.ERROR);
         }
         finally
         {
@@ -63,22 +68,28 @@ public class MainSocketHandler implements Runnable
         {
             handleRequest(incomingData, outgoingData);
         }
-        catch (ServerException | NotFoundException | InvalidActionException e)
+        catch (NotFoundException | InvalidActionException e)
         {
+            logger.log(e.getMessage(), LogLevel.INFO);
+            ErrorResponse payload = new ErrorResponse(e.getMessage());
+            Response error = new Response("ERROR", payload);
+            outgoingData.writeObject(error);
+        } catch (ServerException e){
+            logger.log(Arrays.toString(e.getStackTrace()), LogLevel.ERROR);
             ErrorResponse payload = new ErrorResponse(e.getMessage());
             Response error = new Response("ERROR", payload);
             outgoingData.writeObject(error);
         }
         catch (ClassCastException e)
         {
-            e.printStackTrace();
+            logger.log(e.getMessage(), LogLevel.INFO);
             ErrorResponse payload = new ErrorResponse("Invalid request");
             Response error = new Response("ERROR", payload);
             outgoingData.writeObject(error);
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            logger.log(Arrays.toString(e.getStackTrace()), LogLevel.ERROR);
             ErrorResponse payload = new ErrorResponse(e.getMessage());
             Response error = new Response("SERVER_FAILURE", payload);
             outgoingData.writeObject(error);
@@ -88,6 +99,8 @@ public class MainSocketHandler implements Runnable
     private void handleRequest(ObjectInputStream incomingData, ObjectOutputStream outgoingData) throws IOException, ClassNotFoundException
     {
         Request request = (Request) incomingData.readObject();
+        logger.log("Incoming request: " + request.handler() + "/" + request.action() + ". Body: " + request.payload(), LogLevel.INFO);
+
         RequestHandler handler = switch (request.handler())
         {
             case "auth" -> serviceProvider.getAuthenticationRequestHandler();
