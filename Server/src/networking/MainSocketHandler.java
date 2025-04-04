@@ -74,7 +74,9 @@ public class MainSocketHandler implements Runnable
             ErrorResponse payload = new ErrorResponse(e.getMessage());
             Response error = new Response("ERROR", payload);
             outgoingData.writeObject(error);
-        } catch (ServerException e){
+        }
+        catch (ServerException e)
+        {
             logger.log(Arrays.toString(e.getStackTrace()), LogLevel.ERROR);
             ErrorResponse payload = new ErrorResponse(e.getMessage());
             Response error = new Response("ERROR", payload);

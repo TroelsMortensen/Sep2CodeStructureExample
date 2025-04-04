@@ -22,27 +22,33 @@ public class ServiceProvider
 
     // This is a fairly crude and basic implementation of the Service Locator pattern.
 
-    public RequestHandler getAuthenticationRequestHandler() {
+    public RequestHandler getAuthenticationRequestHandler()
+    {
         return new AuthRequestHandler(getAuthenticationService());
     }
 
-    public RequestHandler getUserRequestHandler(){
+    public RequestHandler getUserRequestHandler()
+    {
         return new UserRequestHandler(getUserService());
     }
 
-    public Logger getLogger(){
+    public Logger getLogger()
+    {
         return new ConsoleLogger(LogLevel.WARNING);
     }
 
-    private static AuthenticationService getAuthenticationService() {
+    private static AuthenticationService getAuthenticationService()
+    {
         return new AuthServiceImpl(getUserDao());
     }
 
-    private static UserService getUserService() {
+    private static UserService getUserService()
+    {
         return new UserServiceImpl(getUserDao());
     }
 
-    private static UserListDao getUserDao() {
+    private static UserListDao getUserDao()
+    {
         return new UserListDao();
     }
 }

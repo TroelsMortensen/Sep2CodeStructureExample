@@ -1,6 +1,7 @@
 package model.entities;
 
-public class User {
+public class User
+{
     private String email;
     private String password;
     private String firstName;
@@ -9,7 +10,8 @@ public class User {
     private boolean isBlacklisted;
     private String blacklistReason;
 
-    public User(String email, String password, String firstName, String lastName) {
+    public User(String email, String password, String firstName, String lastName)
+    {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -19,40 +21,49 @@ public class User {
         blacklistReason = "";
     }
 
-    public String getEmail() {
+    public String getEmail()
+    {
         return email;
     }
 
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
-    public String getFirstName() {
+    public String getFirstName()
+    {
         return firstName;
     }
 
-    public String getLastName() {
+    public String getLastName()
+    {
         return lastName;
     }
 
-    public boolean isAdmin() {
+    public boolean isAdmin()
+    {
         return isAdmin;
     }
 
-    public boolean isBlacklisted() {
+    public boolean isBlacklisted()
+    {
         return isBlacklisted;
     }
 
-    public void blacklist(String reason) {
+    public void blacklist(String reason)
+    {
         isBlacklisted = true;
         blacklistReason = reason;
     }
 
-    public void setAdmin(boolean promoteToAdmin) {
+    public void setAdmin(boolean promoteToAdmin)
+    {
         isAdmin = promoteToAdmin;
     }
 
-    public void setPassword(String newPassword) {
+    public void setPassword(String newPassword)
+    {
         password = newPassword;
     }
 
