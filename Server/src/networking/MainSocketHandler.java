@@ -1,4 +1,4 @@
-package networking.requesthandlers;
+package networking;
 
 import dtos.Request;
 import dtos.Response;
@@ -6,6 +6,7 @@ import dtos.error.ErrorResponse;
 import model.exceptions.ServerException;
 import model.exceptions.NotFoundException;
 import networking.exceptions.InvalidActionException;
+import networking.requesthandlers.RequestHandler;
 import startup.ServiceProvider;
 
 import java.io.*;
