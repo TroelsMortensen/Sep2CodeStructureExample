@@ -14,6 +14,10 @@ import utilities.logging.LogLevel;
 import utilities.logging.Logger;
 import model.exceptions.NoSuchServiceException;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+
 public class ServiceProvider
 {
 
@@ -55,23 +59,34 @@ public class ServiceProvider
         return new UserListDao();
     }
 
-
+    // Ignore the below code
     // I am not currently using this. Just checking out what Java can do with generics.
     public <T> T getService(Class<T> serviceType)
     {
-        if (serviceType == AuthRequestHandler.class)
+        if (!serviceRegistry.containsKey(serviceType))
         {
-            return (T) new AuthRequestHandler(getService(AuthenticationService.class));
-        }
-        else if (serviceType == AuthenticationService.class)
-        {
-            return (T) new AuthServiceImpl(getService(UserDao.class));
-        }
-        else if (serviceType == UserDao.class)
-        {
-            return (T) new UserListDao();
-        }
 
-        throw new NoSuchServiceException(serviceType.getName());
+            throw new NoSuchServiceException(serviceType.getName());
+        }
+        return (T) serviceRegistry.get(serviceType);
+    }
+
+    private static Map<Class<?>, Supplier<?>> serviceRegistry = new HashMap<>();
+
+    static
+    {
+        serviceRegistry.put(
+                AuthRequestHandler.class,
+                () -> new AuthRequestHandler((AuthenticationService) serviceRegistry.get(AuthenticationService.class).get())
+        );
+        serviceRegistry.put(
+                AuthenticationService.class,
+                () -> new AuthServiceImpl((UserDao) serviceRegistry.get(UserDao.class).get())
+        );
+        serviceRegistry.put(
+                UserDao.class,
+                () -> new UserListDao()
+        );
+
     }
 }
