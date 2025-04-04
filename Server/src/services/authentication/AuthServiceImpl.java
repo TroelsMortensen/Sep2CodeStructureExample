@@ -86,7 +86,14 @@ public class AuthServiceImpl implements AuthenticationService
             throw new ServerException("This user is blacklisted: " + existingUser.getBlacklistReason());
         }
 
-        UserDataDto userData = new UserDataDto(existingUser.getEmail(), existingUser.getFirstName(), existingUser.getLastName(), existingUser.isBlacklisted(), existingUser.isAdmin());
+        UserDataDto userData = new UserDataDto
+                (
+                        existingUser.getEmail(),
+                        existingUser.getFirstName(),
+                        existingUser.getLastName(),
+                        existingUser.isBlacklisted(),
+                        existingUser.isAdmin()
+                );
         return userData;
     }
 }
