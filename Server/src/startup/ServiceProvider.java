@@ -34,7 +34,7 @@ public class ServiceProvider
 
     public Logger getLogger()
     {
-        return new ConsoleLogger(LogLevel.WARNING);
+        return new ConsoleLogger(LogLevel.INFO);
     }
 
     private static AuthenticationService getAuthenticationService()
