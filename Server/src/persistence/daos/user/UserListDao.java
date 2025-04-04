@@ -32,7 +32,7 @@ public class UserListDao implements UserDao
 
 
     /**
-     * Just find a User entity by a given email.
+     * Find a User entity by a given email.
      * Return null, if no matching user was found.
      * I could have thrown an exception instead, it might be simpler.
      *
