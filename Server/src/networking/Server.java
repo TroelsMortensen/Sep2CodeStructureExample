@@ -1,17 +1,17 @@
 package networking;
 
 import networking.requesthandlers.MainSocketHandler;
-import startup.ServiceLocator;
+import startup.ServiceProvider;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-    private final ServiceLocator serviceLocator;
+    private final ServiceProvider serviceProvider;
 
-    public Server(ServiceLocator serviceLocator) {
-        this.serviceLocator = serviceLocator;
+    public Server(ServiceProvider serviceProvider) {
+        this.serviceProvider = serviceProvider;
     }
 
     public void start() throws IOException {
@@ -19,7 +19,7 @@ public class Server {
         System.out.println("Server started, listening for connections...");
         while(true){
             Socket socket = serverSocket.accept();
-            MainSocketHandler socketHandler = new MainSocketHandler(socket, serviceLocator);
+            MainSocketHandler socketHandler = new MainSocketHandler(socket, serviceProvider);
             Thread socketThread = new Thread(socketHandler);
             socketThread.start();
         }

@@ -7,7 +7,7 @@ import java.io.IOException;
 public class RunServer {
 
     public static void main(String[] args) throws IOException {
-        ServiceLocator serviceLocator = new ServiceLocator();
+        ServiceProvider serviceLocator = new ServiceProvider();
         Server server = new Server(serviceLocator);
         server.start();
     }

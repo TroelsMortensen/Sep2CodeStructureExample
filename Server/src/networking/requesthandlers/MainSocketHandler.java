@@ -6,7 +6,7 @@ import dtos.error.ErrorResponse;
 import model.exceptions.ServerException;
 import model.exceptions.NotFoundException;
 import networking.exceptions.InvalidActionException;
-import startup.ServiceLocator;
+import startup.ServiceProvider;
 
 import java.io.*;
 import java.net.Socket;
@@ -23,12 +23,12 @@ public class MainSocketHandler implements Runnable
     // * respond back to the client with either a success or failure message
 
     private final Socket clientSocket;
-    private final ServiceLocator serviceLocator;
+    private final ServiceProvider serviceProvider;
 
-    public MainSocketHandler(Socket clientSocket, ServiceLocator serviceLocator)
+    public MainSocketHandler(Socket clientSocket, ServiceProvider serviceProvider)
     {
         this.clientSocket = clientSocket;
-        this.serviceLocator = serviceLocator;
+        this.serviceProvider = serviceProvider;
     }
 
     @Override
@@ -89,8 +89,8 @@ public class MainSocketHandler implements Runnable
         Request request = (Request) incomingData.readObject();
         RequestHandler handler = switch (request.handler())
         {
-            case "auth" -> serviceLocator.getAuthenticationRequestHandler();
-            case "users" -> serviceLocator.getUserRequestHandler();
+            case "auth" -> serviceProvider.getAuthenticationRequestHandler();
+            case "users" -> serviceProvider.getUserRequestHandler();
             default -> throw new IllegalStateException("Unexpected value: " + request.handler());
         };
 
