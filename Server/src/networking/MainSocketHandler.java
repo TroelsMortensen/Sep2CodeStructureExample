@@ -3,7 +3,8 @@ package networking;
 import dtos.Request;
 import dtos.Response;
 import dtos.error.ErrorResponse;
-import model.exceptions.ServerException;
+import model.exceptions.ServerFailureException;
+import model.exceptions.ValidationException;
 import model.exceptions.NotFoundException;
 import networking.exceptions.InvalidActionException;
 import networking.requesthandlers.RequestHandler;
@@ -68,18 +69,17 @@ public class MainSocketHandler implements Runnable
         {
             handleRequest(incomingData, outgoingData);
         }
-        catch (NotFoundException | InvalidActionException e)
+        catch (NotFoundException | InvalidActionException | ValidationException e)
         {
             logger.log(e.getMessage(), LogLevel.INFO);
             ErrorResponse payload = new ErrorResponse(e.getMessage());
             Response error = new Response("ERROR", payload);
             outgoingData.writeObject(error);
         }
-        catch (ServerException e)
-        {
-            logger.log(Arrays.toString(e.getStackTrace()), LogLevel.ERROR);
+        catch(ServerFailureException e){
+            logger.log(Arrays.toString(e.getStackTrace()) + "\n" + e.getMessage(), LogLevel.ERROR);
             ErrorResponse payload = new ErrorResponse(e.getMessage());
-            Response error = new Response("ERROR", payload);
+            Response error = new Response("SERVER_FAILURE", payload);
             outgoingData.writeObject(error);
         }
         catch (ClassCastException e)

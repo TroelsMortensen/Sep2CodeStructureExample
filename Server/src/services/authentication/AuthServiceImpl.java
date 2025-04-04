@@ -4,7 +4,7 @@ import dtos.auth.LoginRequest;
 import dtos.auth.RegisterUserRequest;
 import dtos.user.UserDataDto;
 import model.entities.User;
-import model.exceptions.ServerException;
+import model.exceptions.ValidationException;
 import persistence.daos.user.UserDao;
 
 public class AuthServiceImpl implements AuthenticationService
@@ -24,7 +24,7 @@ public class AuthServiceImpl implements AuthenticationService
         User existingUser = userDao.getSingle(request.email());
         if (existingUser != null)
         {
-            throw new ServerException("Email is already in use.");
+            throw new ValidationException("Email is already in use.");
         }
 
         validateEmailIsCorrectFormat(request.email());
@@ -47,11 +47,11 @@ public class AuthServiceImpl implements AuthenticationService
         // validate password has correct format, e.g. upper case/lower case, symbols, numbers, etc
         if (password.length() < 8)
         {
-            throw new ServerException("Password must be 8 or more characters");
+            throw new ValidationException("Password must be 8 or more characters");
         }
         if (password.length() > 24)
         {
-            throw new ServerException("Password must be 24 or fewer characters");
+            throw new ValidationException("Password must be 24 or fewer characters");
         }
         // etc..
     }
@@ -73,17 +73,17 @@ public class AuthServiceImpl implements AuthenticationService
         User existingUser = userDao.getSingle(request.email());
         if (existingUser == null)
         {
-            throw new ServerException("User not found.");
+            throw new ValidationException("User not found.");
         }
 
         if (!existingUser.getPassword().equals(request.password()))
         {
-            throw new ServerException("Incorrect password.");
+            throw new ValidationException("Incorrect password.");
         }
 
         if (existingUser.isBlacklisted())
         {
-            throw new ServerException("This user is blacklisted: " + existingUser.getBlacklistReason());
+            throw new ValidationException("This user is blacklisted: " + existingUser.getBlacklistReason());
         }
 
         UserDataDto userData = new UserDataDto

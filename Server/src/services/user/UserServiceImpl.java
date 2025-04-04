@@ -5,7 +5,7 @@ import dtos.user.PromoteUserRequest;
 import dtos.user.UpdatePasswordRequest;
 import dtos.user.ViewUsers;
 import model.entities.User;
-import model.exceptions.ServerException;
+import model.exceptions.ValidationException;
 import model.exceptions.NotFoundException;
 import persistence.daos.user.UserDao;
 
@@ -40,12 +40,12 @@ public class UserServiceImpl implements UserService
         // validate
         if (user.isBlacklisted())
         {
-            throw new ServerException("The user with email '" + request.email() + "' is blacklisted, and cannot be promoted to admin.");
+            throw new ValidationException("The user with email '" + request.email() + "' is blacklisted, and cannot be promoted to admin.");
         }
 
         if (user.isAdmin())
         {
-            throw new ServerException("The user with email '" + request.email() + "' is already an admin.");
+            throw new ValidationException("The user with email '" + request.email() + "' is already an admin.");
         }
 
         // update
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService
         }
         if (user.isBlacklisted())
         {
-            throw new ServerException("The user with email '" + request.email() + "' is already blacklisted.");
+            throw new ValidationException("The user with email '" + request.email() + "' is already blacklisted.");
         }
         user.blacklist(request.reason()); // Alternatively I could have a setBlackList(true, request.reason()) method. I prefer this clearer approach.
         user.setAdmin(false); // admins are automatically demoted when blacklisted.
@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService
         // validate
         if (!user.getPassword().equals(request.oldPassword()))
         {
-            throw new ServerException("Incorrect password");
+            throw new ValidationException("Incorrect password");
         }
 
         // update
