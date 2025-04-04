@@ -10,5 +10,5 @@ public interface UserDao
     User getSingle(String email);
     void delete(String email);
     void save(User user);
-    List<User> getMany(int i, int pageSize, String s);
+    List<User> getMany(int pageIndex, int pageSize, String s);
 }
