@@ -3,6 +3,7 @@ package startup;
 import networking.requesthandlers.AuthRequestHandler;
 import networking.requesthandlers.RequestHandler;
 import networking.requesthandlers.UserRequestHandler;
+import persistence.daos.user.UserDao;
 import persistence.daos.user.UserListDao;
 import services.authentication.AuthServiceImpl;
 import services.authentication.AuthenticationService;
@@ -11,6 +12,7 @@ import services.user.UserServiceImpl;
 import utilities.logging.ConsoleLogger;
 import utilities.logging.LogLevel;
 import utilities.logging.Logger;
+import model.exceptions.NoSuchServiceException;
 
 public class ServiceProvider
 {
@@ -26,6 +28,7 @@ public class ServiceProvider
     {
         return new AuthRequestHandler(getAuthenticationService());
     }
+
 
     public RequestHandler getUserRequestHandler()
     {
@@ -50,5 +53,25 @@ public class ServiceProvider
     private static UserListDao getUserDao()
     {
         return new UserListDao();
+    }
+
+
+    // I am not currently using this. Just checking out what Java can do with generics.
+    public <T> T getService(Class<T> serviceType)
+    {
+        if (serviceType == AuthRequestHandler.class)
+        {
+            return (T) new AuthRequestHandler(getService(AuthenticationService.class));
+        }
+        else if (serviceType == AuthenticationService.class)
+        {
+            return (T) new AuthServiceImpl(getService(UserDao.class));
+        }
+        else if (serviceType == UserDao.class)
+        {
+            return (T) new UserListDao();
+        }
+
+        throw new NoSuchServiceException(serviceType.getName());
     }
 }
