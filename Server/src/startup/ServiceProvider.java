@@ -17,6 +17,8 @@ public class ServiceProvider
     // If an implementation needs to be swapped out, e.g. DAO implementations,
     // we can do that a single place, and it will take effect across the entire application.
 
+    // This is a fairly crude and basic implementation of the Service Locator pattern.
+
     public RequestHandler getAuthenticationRequestHandler() {
         return new AuthRequestHandler(getAuthenticationService());
     }
