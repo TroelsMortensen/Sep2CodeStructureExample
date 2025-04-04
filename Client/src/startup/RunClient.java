@@ -3,7 +3,7 @@ package startup;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class StartApp extends Application
+public class RunClient extends Application
 {
     @Override
     public void start(Stage stage) throws Exception
@@ -16,6 +16,6 @@ public class StartApp extends Application
 
     public static void main(String[] args)
     {
-        StartApp.launch(args);
+        RunClient.launch(args);
     }
 }
