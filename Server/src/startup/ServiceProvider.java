@@ -54,7 +54,7 @@ public class ServiceProvider
         return new UserServiceImpl(getUserDao());
     }
 
-    private static UserListDao getUserDao()
+    private static UserDao getUserDao()
     {
         return new UserListDao();
     }
